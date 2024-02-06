@@ -70,10 +70,13 @@ async function getLoginData() {
 
 // Define routes
 // Define the endpoint to get a single item by ID
-app.get("/users/:id", async (req, res) => {
+app.get("/users/:username/:password", async (req, res) => {
   const loginData = await getLoginData();
-  const itemId = parseInt(req.params.id);
-  const item = loginData.find((i) => i.id === itemId);
+  const itemUsername = req.params.Username;
+  const itemPassword = req.params.password;
+  const item = loginData.find(
+    (i) => i.Username === itemUsername && i.password === itemPassword
+  );
 
   if (!item) {
     res.status(404).send("Item not found");
