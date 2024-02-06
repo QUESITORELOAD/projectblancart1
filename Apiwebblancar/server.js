@@ -81,6 +81,7 @@ app.get("/users/:username/:password", async (req, res) => {
   if (!item) {
     res.status(404).send("Item not found");
   } else {
+    delete item.password;
     res.json(item);
   }
 });
