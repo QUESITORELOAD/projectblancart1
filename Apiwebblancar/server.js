@@ -19,6 +19,7 @@ const config = {
 
 // Middleware
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 sql.connect(config, (err) => {
@@ -79,7 +80,8 @@ app.get("/users/:username/:password", async (req, res) => {
   );
 
   if (!item) {
-    res.status(404).send("Item not found");
+    res.status(404).send("User Not Found");
+    console.log("status code 404");
   } else {
     delete item.password;
     res.json(item);
